@@ -2,7 +2,7 @@
   "name": "insphare/saprfcdal",
   "version": "0.1.0",
   "description": "Simple communication exchange between your php-application and sap.",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "license": "MIT",
   "type": "library",
   "authors": [
