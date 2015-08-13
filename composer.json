@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Simple communication exchange between your php-application and sap.",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "MIT",
   "type": "library",
   "authors": [
     {
