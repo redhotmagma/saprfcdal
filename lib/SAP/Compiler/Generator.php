@@ -27,27 +27,27 @@ class SAP_Compiler_Generator {
 		$this->printOutput('Destination: ' . $compileDirectory);
 		$modules = $this->getModules();
 		foreach ($modules as $module) {
-				$this->params = [];
-				$this->printOutput('Generate: ' . $module);
-				$data = $this->getConnection()->getMetaData($module);
+			$this->params = [];
+			$this->printOutput('Generate: ' . $module);
+			$data = $this->getConnection()->getMetaData($module);
 
-				foreach ($data as $metaData) {
-					switch ($metaData['type']) {
-						case 'IMPORT':
-							$this->generateImport($module, $metaData);
-							break;
+			foreach ($data as $metaData) {
+				switch ($metaData['type']) {
+					case 'IMPORT':
+						$this->generateImport($module, $metaData);
+						break;
 
-						case 'EXPORT':
-							$this->generateExport($module, $metaData);
-							break;
+					case 'EXPORT':
+						$this->generateExport($module, $metaData);
+						break;
 
-						case 'TABLE':
-							$this->generateTable($module, $metaData);
-							break;
-					}
+					case 'TABLE':
+						$this->generateTable($module, $metaData);
+						break;
 				}
-				$this->generateModule($module);
 			}
+			$this->generateModule($module);
+		}
 	}
 
 	/**
@@ -171,7 +171,7 @@ class SAP_Compiler_Generator {
 					$type = 'string';
 			}
 
-			$doc[] = '* @property ' . $type . ' $' . $definitionName . ' ' . $type . '('.$definition['len'].')';
+			$doc[] = '* @property ' . $type . ' $' . $definitionName . ' ' . $type . '(' . $definition['len'] . ')';
 		}
 
 		$doc[] = '*/';
@@ -298,9 +298,14 @@ class SAP_Compiler_Generator {
 	 * @since 2013
 	 */
 	private function getModules() {
-		$ymlPath = implode(DIRECTORY_SEPARATOR, [EnvironmentVar::get(EnvironmentVar::VENDOR_PATH), 'cli', 'modules.yml']);
+		$ymlPath = implode(DIRECTORY_SEPARATOR, [
+			EnvironmentVar::get(EnvironmentVar::VENDOR_PATH),
+			'cli',
+			'modules.yml'
+		]);
 		$modules = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($ymlPath));
 		$modules = array_combine($modules, $modules);
+
 		return $modules;
 	}
 

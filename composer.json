@@ -1,5 +1,6 @@
 {
   "name": "insphare/saprfcdal",
+  "version": "0.1.0",
   "description": "Simple communication exchange between your php-application and sap.",
   "minimum-stability": "stable",
   "license": "proprietary",
@@ -15,9 +16,11 @@
     "symfony/yaml": "2.7"
   },
   "autoload": {
-    "files": ["bootstrap.php"],
+    "files": [
+      "bootstrap.php"
+    ],
     "psr-0": {
-       "": "lib"
-     }
+      "": "lib"
+    }
   }
 }

@@ -43,16 +43,12 @@ abstract class SAP_Module_Abstract {
 	 */
 	private $dataImport = array();
 
-
-
 	/**
 	 * @param null $moduleName
 	 */
-	protected function setModuleName( $moduleName ) {
-		$this->moduleName = (string) $moduleName;
+	protected function setModuleName($moduleName) {
+		$this->moduleName = (string)$moduleName;
 	}
-
-
 
 	/**
 	 * @return null
@@ -61,32 +57,26 @@ abstract class SAP_Module_Abstract {
 		return $this->moduleName;
 	}
 
-
-
 	/**
 	 * @return null|SAP_Connection
 	 * @author Manuel Will
 	 * @since 2013
 	 */
 	private function getConnection() {
-		if( null === $this->connection ) {
+		if (null === $this->connection) {
 			$credentials = SAP_Factory::get()->getCredentials();
-			$this->connection = new SAP_Connection( $credentials );
+			$this->connection = new SAP_Connection($credentials);
 		}
 
 		return $this->connection;
 	}
 
-
-
 	/**
 	 * @param array $exporter
 	 */
-	protected function setExporter( $exporter ) {
+	protected function setExporter($exporter) {
 		$this->exporter = $exporter;
 	}
-
-
 
 	/**
 	 * @return array
@@ -95,16 +85,12 @@ abstract class SAP_Module_Abstract {
 		return $this->exporter;
 	}
 
-
-
 	/**
 	 * @param array $importer
 	 */
-	protected function setImporter( $importer ) {
+	protected function setImporter($importer) {
 		$this->importer = $importer;
 	}
-
-
 
 	/**
 	 * @return array
@@ -113,16 +99,12 @@ abstract class SAP_Module_Abstract {
 		return $this->importer;
 	}
 
-
-
 	/**
 	 * @param array $tables
 	 */
-	protected function setTables( $tables ) {
+	protected function setTables($tables) {
 		$this->tables = $tables;
 	}
-
-
 
 	/**
 	 * @return array
@@ -131,27 +113,23 @@ abstract class SAP_Module_Abstract {
 		return $this->tables;
 	}
 
-
-
 	/**
 	 * @return array
 	 * @author Manuel Will
 	 * @since 2013
 	 */
 	public function get() {
-		$this->getConnection()->reset( $this );
-		foreach( $this->dataImport as $import ) {
-			$this->getConnection()->setImport( $this->getModuleName(), $import );
+		$this->getConnection()->reset($this);
+		foreach ($this->dataImport as $import) {
+			$this->getConnection()->setImport($this->getModuleName(), $import);
 		}
 
-		foreach( $this->dataTable as $table ) {
-			$this->getConnection()->setAppendTable( $this->getModuleName(), $table );
+		foreach ($this->dataTable as $table) {
+			$this->getConnection()->setAppendTable($this->getModuleName(), $table);
 		}
 
-		return $this->getConnection()->executeRead( $this );
+		return $this->getConnection()->executeRead($this);
 	}
-
-
 
 	/**
 	 * @author Manuel Will
@@ -159,13 +137,11 @@ abstract class SAP_Module_Abstract {
 	 */
 	public function closeConnection() {
 
-		if( null !== $this->connection ) {
+		if (null !== $this->connection) {
 			$this->getConnection()->closeConnection();
 			$this->connection = null;
 		}
 	}
-
-
 
 	/**
 	 * @param bool $compressed
@@ -174,13 +150,11 @@ abstract class SAP_Module_Abstract {
 	 * @author Manuel Will
 	 * @since 2013
 	 */
-	public function getDebug( $compressed = false ) {
-		$debug = $this->getConnection()->getDebug( $compressed );
+	public function getDebug($compressed = false) {
+		$debug = $this->getConnection()->getDebug($compressed);
 
 		return $debug;
 	}
-
-
 
 	/**
 	 * @return array
@@ -188,16 +162,16 @@ abstract class SAP_Module_Abstract {
 	 * @since 2013
 	 */
 	public function save() {
-		$this->getConnection()->reset( $this );
-		foreach( $this->dataImport as $import ) {
-			$this->getConnection()->setImport( $this->getModuleName(), $import );
+		$this->getConnection()->reset($this);
+		foreach ($this->dataImport as $import) {
+			$this->getConnection()->setImport($this->getModuleName(), $import);
 		}
 
-		foreach( $this->dataTable as $table ) {
-			$this->getConnection()->setTable( $this->getModuleName(), $table );
+		foreach ($this->dataTable as $table) {
+			$this->getConnection()->setTable($this->getModuleName(), $table);
 		}
 
-		return $this->getConnection()->executeSave( $this );
+		return $this->getConnection()->executeSave($this);
 	}
 
 	/**
@@ -208,32 +182,32 @@ abstract class SAP_Module_Abstract {
 	 * @author Manuel Will
 	 * @since 2013
 	 */
-	public function addImport( SAP_Import_Abstract $import, $disabledAutoX = false ) {
-		$className = get_class( $import );
-		if( ! isset( $this->importer[$className] ) ) {
-			throw new Exception( 'Not allowed importer instance: ' . $className . ' for module: ' . get_class( $this ) );
+	public function addImport(SAP_Import_Abstract $import, $disabledAutoX = false) {
+		$className = get_class($import);
+		if (!isset($this->importer[$className])) {
+			throw new Exception('Not allowed importer instance: ' . $className . ' for module: ' . get_class($this));
 		}
 
 		$importClassXName = $className . 'x';
-		$classImportXExists = class_exists( $importClassXName );
-		if( true === $classImportXExists && false === $disabledAutoX ) {
+		$classImportXExists = class_exists($importClassXName);
+		if (true === $classImportXExists && false === $disabledAutoX) {
 			$importerClassX = new $importClassXName();
 			$arrData = $import->getDataRaw();
-			foreach( array_keys( $arrData ) as $key ) {
+			foreach (array_keys($arrData) as $key) {
 				try {
 					$importerClassX->{$key} = 'X';
 				}
-				catch( Exception $e ) {
+				catch (Exception $e) {
 					// silent catch
 				}
 			}
 
-			if( ! isset( $this->dataImport[$importClassXName] ) ) {
+			if (!isset($this->dataImport[$importClassXName])) {
 				$this->dataImport[$importClassXName] = $importerClassX;
 			}
 		}
 
-		if( ! isset( $this->dataImport[$className] ) ) {
+		if (!isset($this->dataImport[$className])) {
 			$this->dataImport[$className] = $import;
 		}
 	}
@@ -246,33 +220,33 @@ abstract class SAP_Module_Abstract {
 	 * @author Manuel Will
 	 * @since 2013
 	 */
-	public function addTable( SAP_Table_Abstract $table, $disabledAutoX = false ) {
-		$className = get_class( $table );
+	public function addTable(SAP_Table_Abstract $table, $disabledAutoX = false) {
+		$className = get_class($table);
 
-		if( ! isset( $this->tables[$className] ) ) {
-			throw new Exception( 'Not allowed table instance: ' . $className . ' for module: ' . get_class( $this ) );
+		if (!isset($this->tables[$className])) {
+			throw new Exception('Not allowed table instance: ' . $className . ' for module: ' . get_class($this));
 		}
 
 		$tableClassXName = $className . 'x';
-		$classTableXExists = class_exists( $tableClassXName );
-		if( true === $classTableXExists && false === $disabledAutoX ) {
+		$classTableXExists = class_exists($tableClassXName);
+		if (true === $classTableXExists && false === $disabledAutoX) {
 			$tableClassX = new $tableClassXName();
 			$arrData = $table->getDataRaw();
-			foreach( array_keys( $arrData ) as $key ) {
+			foreach (array_keys($arrData) as $key) {
 				try {
 					$tableClassX->{$key} = 'X';
 				}
-				catch( Exception $e ) {
+				catch (Exception $e) {
 					// silent catch
 				}
 			}
 
-			if( ! isset( $this->dataTable[$tableClassXName] ) ) {
+			if (!isset($this->dataTable[$tableClassXName])) {
 				$this->dataTable[$tableClassXName] = $tableClassX;
 			}
 		}
 
-		if( ! isset( $this->dataTable[$className] ) ) {
+		if (!isset($this->dataTable[$className])) {
 			$this->dataTable[$className] = $table;
 		}
 	}
