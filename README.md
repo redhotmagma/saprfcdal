@@ -3,24 +3,24 @@ saprfcdal
 
 The saprfc data abstraction layer allows easy communication between your application and SAP.
 
-## author
+### author
 - Manuel Will <insphare@gmail.com>
 
 
-## requires
+### requires
 - composer (https://getcomposer.org/)
 - minimum php 5.3 and above
 - php-cli
 - saprfc-extension (http://saprfc.sourceforge.net/)
 
 
-## todo:
+### todo
 - create an installation tutorial how to generate the saprfc-extension
 - make the modules configurable /cli/modules.yml
 - create a better documentation
 
 
-## changelog
+### changelog
 - 2015-08-13, integrate composer
 - 2015-08-13, using composer's auto loader
 - 2015-08-13, using symfony/yaml
