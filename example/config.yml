@@ -1,0 +1,10 @@
+compile-dir: "/tmp/"
+
+credentials:
+  ASHOST:   '132.231.xxx.x'
+  SYSNR:    '00'
+  CLIENT:   '040'
+  USER:     'sapuser'
+  PASSWD:   'sappassword'
+  LANG:     'DE'
+  CODEPAGE: '4110'
