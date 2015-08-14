@@ -4,7 +4,7 @@ saprfcdal
 The saprfc data abstraction layer allows easy communication between your application and SAP.
 
 ### author
-- Manuel Will <insphare@gmail.com>
+- Manuel Will <will@redhotmagma.de>
 
 
 ### requires

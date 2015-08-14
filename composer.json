@@ -1,6 +1,5 @@
 {
-  "name": "insphare/saprfcdal",
-  "version": "0.1.0",
+  "name": "redhotmamga/saprfcdal",
   "description": "Simple communication exchange between your php-application and sap.",
   "minimum-stability": "dev",
   "license": "MIT",
@@ -8,7 +7,7 @@
   "authors": [
     {
       "name": "Manuel Will",
-      "email": "insphare@gmail.com"
+      "email": "will@redhotmagma.de"
     }
   ],
   "require": {
