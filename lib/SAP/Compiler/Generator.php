@@ -173,10 +173,10 @@ class SAP_Compiler_Generator {
 					$type = 'string';
 			}
 
-			$doc[] = '* @property ' . $type . ' $' . $definitionName . ' ' . $type . '(' . $definition['len'] . ')';
+			$doc[] = ' * @property ' . $type . ' $' . $definitionName . ' ' . $type . '(' . $definition['len'] . ')';
 		}
 
-		$doc[] = '*/';
+		$doc[] = ' */';
 		$functionName = str_replace($className . '::', '', $methodName);
 		$functionName = str_replace('generate', '', $functionName);
 		$template = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Templates/' . $functionName . '.tpl';
