@@ -27,8 +27,10 @@ The saprfc data abstraction layer allows easy communication between your applica
 ### Authors
 - Manuel Will <will@redhotmagma.de>
 
-See also the list of [contributors][6] who participated in this project.
+See also the list of [contributors][1] who participated in this project.
 
 
 ## License
 This bundle is released under the MIT license
+
+[1]: https://github.com/redhotmagma/saprfcdal/graphs/contributors
