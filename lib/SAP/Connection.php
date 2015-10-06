@@ -398,7 +398,7 @@ class SAP_Connection {
 		$successState = @saprfc_table_read($moduleResource, 'RETURN', 1);
 		//
 		if (!empty($successState['TYPE']) && $successState['TYPE'] == 'E') {
-			throw new SAP_Exception(print_r($successState, true));
+			throw new SAP_Exception(json_encode($successState));
 		}
 
 		$result = array();
